@@ -15,6 +15,10 @@
   --red-light-border: #ef0707;
   --red-light-reflex: #d54441;
   --red-light-reflex-boder: #ec4040;
+  
+  --yellow-light: #7f8311;
+  --yellow-light-border: #e5e718;
+  --yellow-light-reflex: #c8c72b;
 }
 
 body {
@@ -194,6 +198,38 @@ body {
   border-radius: 100%;
   transform: translate(30%, 10%);
   border: solid var(--red-light-reflex-boder);
+}
+
+.yellow-light-border {
+  background-color: var(--yellow-light-border);
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 100%;
+  transform: translate(470%, -380%);
+}
+
+.yellow-light{
+  background-color: var(--yellow-light);
+  width: 1.55rem;
+  height: 1.55rem;
+  border-radius: 100%;
+  transform: translate(13%, 16%);
+}
+
+.yellow-light-reflex-1{
+  background-color: var(--yellow-light-border);
+  width: 1rem;
+  height: 1rem;
+  border-radius: 100%;
+  transform: translate(12%, 1%);
+}
+
+.yellow-light-reflex-2{
+  background-color: var(--yellow-light-reflex);
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 100%;
+  transform: translate(50%, 25%);
 }
 
 /* 
