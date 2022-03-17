@@ -7,13 +7,14 @@ const fetchPokemon = async () => {
     pokeImage("./assets/img/pokeball-catch-fail.png");
     let c = 0;
     const interval = setInterval(() => {
-      c += 1;
+      c++;
       pokeImage("./assets/img/pokeball.png");
 
       if (c % 2 == 0) pokeImage("./assets/img/pokeball-catch-fail.png");
 
       if (c >= 10) clearInterval(interval);
     }, 1000);
+    clearInterval(interval);
   } else {
     const data = await response.json();
     if (!data.results) {
@@ -28,3 +29,5 @@ const pokeImage = (url) => {
   const pokePhoto = document.getElementById("pokeImg");
   pokePhoto.src = url;
 }
+
+const onEnter = (event) => { if (event.keyCode === 13) fetchPokemon(); }
