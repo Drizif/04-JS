@@ -7,10 +7,14 @@
   --screen-color: #f1f2d3;
   --screen-border-color: #6a6a72;
   /* Lights */
-  --light-border: #fbfbfb;
   --blue-light: #009dd4;
+  --blue-light-border: #fbfbfb;
   --blue-light-reflex-1: #0aceff;
   --blue-light-reflex-2: #9ce8ff;
+  --red-light: #9a0405;
+  --red-light-border: #ef0707;
+  --red-light-reflex: #d54441;
+  --red-light-reflex-boder: #ec4040;
 }
 
 body {
@@ -59,8 +63,8 @@ body {
 
 /* Screen */
 .screen-container {
-  display: flex;
-  transform: translate(5%, -40%)
+  position: absolute;
+  transform: translate(5%, 50%)
 }
 
 .screen {
@@ -101,10 +105,9 @@ body {
 .pokedex-cover::before {
   content: '';
   position: absolute;
-  /* left: -3px; */
   bottom: 0;
   width: 100%;
-  height: 84%;
+  height: 50%;
   border-right: solid var(--pokedex-line-color) 3px;
   border-bottom-right-radius: 7px;
 }
@@ -126,11 +129,11 @@ body {
 
 .light-container{
   position: absolute;
-  transform: translate(5%, 5%);
+  transform: translate(15%, 5%);
 }
 
-.light-border {
-  background-color: var(--light-border);
+.blue-light-border {
+  background-color: var(--blue-light-border);
   width: 5.5rem;
   height: 5.5rem;
   border-radius: 100%;
@@ -160,6 +163,40 @@ body {
   transform: translate(85%, 30%);
 }
 
+.red-light-border {
+  background-color: var(--red-light-border);
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 100%;
+  transform: translate(330%, -280%);
+}
+
+.red-light{
+  background-color: var(--red-light);
+  width: 1.55rem;
+  height: 1.55rem;
+  border-radius: 100%;
+  transform: translate(13%, 16%);
+}
+
+.red-light-reflex-1{
+  background-color: var(--red-light-border);
+  width: 1rem;
+  height: 1rem;
+  border-radius: 100%;
+  transform: translate(12%, 1%);
+}
+
+.red-light-reflex-2{
+  background-color: var(--red-light-reflex);
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 100%;
+  transform: translate(30%, 10%);
+  border: solid var(--red-light-reflex-boder);
+}
+
+/* 
 .red-light{
 
 }
@@ -167,4 +204,4 @@ body {
 .yellow-light{
 
 }
-
+ */
