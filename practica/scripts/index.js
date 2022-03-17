@@ -1,12 +1,19 @@
 const fetchPokemon = async () => {
-  const pokeNameInput = document.getElementById("pokeName");
-  let pokeName = pokeNameInput.value;
-  pokeName = pokeName.toLowerCase();
+  const pokeName = document.getElementById("pokeName").value.toLowerCase();
   const url = `https://pokeapi.co/api/v2/pokemon/${pokeName}`;
 
   const response = await fetch(url);
   if (response.status !== 200) {
-    pokeImage("./assets/img/pokeball-catch-fail.png")
+    pokeImage("./assets/img/pokeball-catch-fail.png");
+    let c = 0;
+    const interval = setInterval(() => {
+      c += 1;
+      pokeImage("./assets/img/pokeball.png");
+
+      if (c % 2 == 0) pokeImage("./assets/img/pokeball-catch-fail.png");
+
+      if (c >= 10) clearInterval(interval);
+    }, 1000);
   } else {
     const data = await response.json();
     if (!data.results) {
@@ -19,6 +26,5 @@ const fetchPokemon = async () => {
 
 const pokeImage = (url) => {
   const pokePhoto = document.getElementById("pokeImg");
-  
   pokePhoto.src = url;
 }
