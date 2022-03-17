@@ -1,3 +1,4 @@
+let interval;
 const fetchPokemon = async () => {
   const pokeName = document.getElementById("pokeName").value.toLowerCase();
   const url = `https://pokeapi.co/api/v2/pokemon/${pokeName}`;
@@ -6,7 +7,7 @@ const fetchPokemon = async () => {
   if (response.status !== 200) {
     pokeImage("./assets/img/pokeball-catch-fail.png");
     let c = 0;
-    const interval = setInterval(() => {
+    interval = setInterval(() => {
       c++;
       pokeImage("./assets/img/pokeball.png");
 
@@ -14,11 +15,10 @@ const fetchPokemon = async () => {
 
       if (c >= 10) clearInterval(interval);
     }, 1000);
-    clearInterval(interval);
   } else {
     const data = await response.json();
     if (!data.results) {
-      console.log(data);
+      clearInterval(interval)
       const pokeImg = data.sprites.front_default;
       pokeImage(pokeImg);
     }

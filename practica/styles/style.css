@@ -1,11 +1,16 @@
 :root {
   --background-color: white;
-  /* pokedex */
+  /* Pokedex */
   --pokedex-base-color: #bd0f34;
   --pokedex-line-color: #810a1e;
   --screen-background-color: #dedede;
   --screen-color: #f1f2d3;
   --screen-border-color: #6a6a72;
+  /* Lights */
+  --light-border: #fbfbfb;
+  --blue-light: #009dd4;
+  --blue-light-reflex-1: #0aceff;
+  --blue-light-reflex-2: #9ce8ff;
 }
 
 body {
@@ -19,7 +24,7 @@ body {
 }
 
 /* Search */
-.search-container{
+.search-container {
   padding-top: 3rem;
   display: flex;
   display: inline-flex;
@@ -115,3 +120,51 @@ body {
   stroke: var(--pokedex-line-color);
   stroke-width: 3;
 }
+
+/* Lights */
+
+
+.light-container{
+  position: absolute;
+  transform: translate(5%, 5%);
+}
+
+.light-border {
+  background-color: var(--light-border);
+  width: 5.5rem;
+  height: 5.5rem;
+  border-radius: 100%;
+}
+
+.blue-light{
+  background-color: var(--blue-light);
+  width: 4.3rem;
+  height: 4.3rem;
+  border-radius: 100%;
+  transform: translate(20%, 10%);
+}
+
+.blue-light-reflex-1{
+  background-color: var(--blue-light-reflex-1);
+  width: 3.3rem;
+  height: 3.3rem;
+  border-radius: 100%;
+  transform: translate(12%, 1%);
+}
+
+.blue-light-reflex-2{
+  background-color: var(--blue-light-reflex-2);
+  width: 1.2rem;
+  height: 1.2rem;
+  border-radius: 100%;
+  transform: translate(85%, 30%);
+}
+
+.red-light{
+
+}
+
+.yellow-light{
+
+}
+
