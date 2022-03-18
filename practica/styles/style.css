@@ -23,6 +23,9 @@
   /* Buttons */
   --btn-black: #262626;
   --btn-black-border: #060505;
+  --btn-red-long: #c70c13;
+  --btn-blue-long: #095378;
+  --btn-blue-long-border: #095378;
 }
 
 body {
@@ -240,16 +243,34 @@ body {
 }
 
 /* Buttons */
-.btn-container {
+.btn-black {
   position: absolute;
   transform: translate(30%, 620%);
-}
-
-.btn-black {
   background-color: var(--btn-black);
   border-left: solid var(--btn-black-border) 5px;
   border-bottom: solid var(--btn-black-border) 2px;
   width: 70px;
   height: 70px;
   border-radius: 100%;
+}
+
+.btn-long-container {
+  position: absolute;
+  transform: translate(60%, 28rem);
+}
+
+.btn-red-long {
+  width: 75px;
+  height: 15px;
+  background-color: var(--btn-red-long);
+  border: solid var(--pokedex-line-color) 1px;
+  border-radius: 20% 20% 20% 20%;
+}
+
+.btn-blue-long {
+  width: 75px;
+  height: 15px;
+  background-color: var(--btn-blue-long);
+  border: solid var(--btn-blue-long) 1px;
+  border-radius: 20% 20% 20% 20%;
 }
