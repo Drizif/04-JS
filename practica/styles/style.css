@@ -343,8 +343,14 @@ body {
 }
 
 /* Pokemon */
+#pokeName {
+  font-family: 'Press Start 2P', cursive;
+  font-weight: bolder;
+}
+
 .poke-description {
   padding: 10px 10px 10px 10px;
+  font-family: 'Press Start 2P', cursive;
 }
 
 .overflow-auto {
