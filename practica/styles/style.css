@@ -1,4 +1,6 @@
 :root {
+  /* Colors */
+  /* General */
   --background-color: white;
   /* Pokedex */
   --pokedex-base-color: #bd0f34;
@@ -18,6 +20,9 @@
   --yellow-light: #7f8311;
   --yellow-light-border: #e5e718;
   --yellow-light-reflex: #c8c72b;
+  /* Buttons */
+  --btn-black: #262626;
+  --btn-black-border: #060505;
 }
 
 body {
@@ -232,4 +237,19 @@ body {
   height: 0.4rem;
   border-radius: 100%;
   transform: translate(50%, 25%);
+}
+
+/* Buttons */
+.btn-container {
+  position: absolute;
+  transform: translate(30%, 620%);
+}
+
+.btn-black {
+  background-color: var(--btn-black);
+  border-left: solid var(--btn-black-border) 5px;
+  border-bottom: solid var(--btn-black-border) 2px;
+  width: 70px;
+  height: 70px;
+  border-radius: 100%;
 }
