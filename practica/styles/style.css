@@ -2,6 +2,7 @@
   /* Colors */
   /* General */
   --background-color: white;
+  --font-fam: 'Press Start 2P', cursive;
   /* Pokedex */
   --pokedex-base-color: #bd0f34;
   --pokedex-line-color: #810a1e;
@@ -344,13 +345,13 @@ body {
 
 /* Pokemon */
 #pokeName {
-  font-family: 'Press Start 2P', cursive;
+  font-family: var(--font-fam);
   font-weight: bolder;
 }
 
 .poke-description {
-  padding: 10px 10px 10px 10px;
-  font-family: 'Press Start 2P', cursive;
+  padding: 10px 10px 0px 10px;
+  font-family: var(--font-fam);
 }
 
 .overflow-auto {
