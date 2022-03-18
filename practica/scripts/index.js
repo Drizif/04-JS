@@ -1,16 +1,19 @@
+const pokeName = document.querySelector('#pokeName');
+let interval;
+
 const changeImgSize = (img, width = '100px', height = '100px') => {
   img.style.width = width;
   img.style.height = height;
 }
 
-let interval;
 const fetchPokemon = async () => {
-  const pokeName = document.getElementById("pokeName").value.toLowerCase();
-  const url = `https://pokeapi.co/api/v2/pokemon/${pokeName}`;
+  const pokeInput = document.getElementById("pokeInput").value.toLowerCase();
+  const url = `https://pokeapi.co/api/v2/pokemon/${pokeInput}`;
 
   const response = await fetch(url);
   if (response.status !== 200) {
     pokeImage("./assets/img/pokeball-catch-fail.png");
+    setPokeName();
     let c = 0;
     interval = setInterval(() => {
       c++;
@@ -30,10 +33,22 @@ const fetchPokemon = async () => {
       clearInterval(interval);
       const pokeImg = data.sprites.other['official-artwork'].front_default;
       pokeImage(pokeImg, true);
+      setPokeName(data.name, data.id);
+      console.log(data);
       setPokeDesc(data.species.url);
     }
   }
 }
+
+setPokeName = (name, id) => {
+  if (name && id) {
+    let capitalizedName = name.toUpperCase();
+    pokeName.textContent = `#${id} ${capitalizedName}`;
+  } else {
+    pokeName.textContent = undefined
+  }
+}
+
 const setPokeDesc = async (url) => {
   const response = await fetch(url);
   if (response.status !== 200) {
@@ -42,11 +57,8 @@ const setPokeDesc = async (url) => {
     const data = await response.json();
     const spanishDesc = data['flavor_text_entries'].filter(f => f.language.name.includes('es')).map(e => e.flavor_text);
     const pokeDesc = document.querySelector('#poke-description-text');
-    // pokeDesc.textContent = spanishDesc.pop();
-    if (Array.isArray(spanishDesc) && spanishDesc.length > 0) {
-      pokeDesc.textContent = spanishDesc[0];
 
-    }
+    if (Array.isArray(spanishDesc) && spanishDesc.length > 0) pokeDesc.textContent = spanishDesc[0];
   }
 }
 
@@ -54,7 +66,7 @@ const pokeImage = (url, success = false) => {
   const pokePhoto = document.getElementById("pokeImg");
   pokePhoto.src = url;
   if (success) {
-    changeImgSize(pokePhoto, '200px', '200px');
+    changeImgSize(pokePhoto, '170px', '170px');
   } else {
     changeImgSize(pokePhoto);
   }

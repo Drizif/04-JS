@@ -15,7 +15,7 @@
 <body>
 
   <div class="search-container">
-    <input id="pokeName" type="text" class="form-control" placeholder="ID/Name" onkeypress="onEnter(event)">
+    <input id="pokeInput" type="text" class="form-control" placeholder="ID/Name" onkeypress="onEnter(event)">
     <button type="button" class="btn btn-primary" onclick="fetchPokemon()">Search</button>
   </div>
 
@@ -74,8 +74,11 @@
       <div class="screen-container">
         <div class="screen-border">
           <div class="screen">
-            <img src="./assets/img/pokeball.png" class="img-fluid" alt="Pokemon" id="pokeImg" width="100px"
-              height="100px">
+            <figure align="center">
+              <img src="./assets/img/pokeball.png" class="img-fluid" alt="Pokemon" id="pokeImg" width="100px"
+                height="100px">
+              <figcaption id="pokeName"></figcaption>
+            </figure>
           </div>
         </div>
       </div>
@@ -102,7 +105,7 @@
       <div class="container">
         <div class="screen-green">
           <div class="overflow-auto poke-description">
-              <p align="justify" id="poke-description-text"></p>
+            <p align="justify" id="poke-description-text"></p>
           </div>
         </div>
       </div>
