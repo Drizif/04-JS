@@ -1,4 +1,6 @@
 const pokeName = document.querySelector('#pokeName');
+const pokePhoto = document.getElementById("pokeImg");
+const pokeDesc = document.querySelector('#poke-description-text');
 let interval;
 
 const changeImgSize = (img, width = '100px', height = '100px') => {
@@ -14,6 +16,8 @@ const fetchPokemon = async () => {
   if (response.status !== 200) {
     pokeImage("./assets/img/pokeball-catch-fail.png");
     setPokeName();
+    pokeName.textContent = undefined
+    pokeDesc.textContent = undefined;
     let c = 0;
     interval = setInterval(() => {
       c++;
@@ -25,7 +29,10 @@ const fetchPokemon = async () => {
 
       if (c % 2 == 0) pokeImage("./assets/img/pokeball-catch-fail.png");
 
-      if (c >= 10) clearInterval(interval);
+      if (c >= 4) {
+        pokeDesc.textContent = 'ERROR!';
+        clearInterval(interval);
+      }
     }, 1000);
   } else {
     const data = await response.json();
@@ -43,8 +50,6 @@ setPokeName = (name, id) => {
   if (name && id) {
     let capitalizedName = name.toUpperCase();
     pokeName.textContent = `#${id} ${capitalizedName}`;
-  } else {
-    pokeName.textContent = undefined
   }
 }
 
@@ -55,13 +60,11 @@ const setPokeDesc = async (url) => {
   } else {
     const data = await response.json();
     const spanishDesc = data['flavor_text_entries'].filter(f => f.language.name.includes('es')).map(e => e.flavor_text);
-    const pokeDesc = document.querySelector('#poke-description-text');
     if (Array.isArray(spanishDesc) && spanishDesc.length > 0) pokeDesc.textContent = spanishDesc.shift();
   }
 }
 
 const pokeImage = (url, success = false) => {
-  const pokePhoto = document.getElementById("pokeImg");
   pokePhoto.src = url;
   if (success) {
     changeImgSize(pokePhoto, '170px', '170px');
