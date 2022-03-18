@@ -71,13 +71,13 @@ body {
 }
 
 .screen {
-  width: 340px;
-  height: 230px;
+  width: 300px;
+  height: 200px;
   border: solid var(--screen-border-color) 1px;
-  border-radius: 3% 3% 3% 20%;
+  border-radius: 3% 3% 3% 3%;
   display: grid;
   background-color: var(--screen-color);
-  transform: translate(6%, 9%);
+  transform: translate(13%, 13%);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -128,8 +128,6 @@ body {
 }
 
 /* Lights */
-
-
 .light-container {
   position: absolute;
   transform: translate(15%, 5%);

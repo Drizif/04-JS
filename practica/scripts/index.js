@@ -1,3 +1,8 @@
+const changeImgSize = (img, width = '100px', height = '100px') => {
+  img.style.width = width;
+  img.style.height = height;
+}
+
 let interval;
 const fetchPokemon = async () => {
   const pokeName = document.getElementById("pokeName").value.toLowerCase();
@@ -11,6 +16,10 @@ const fetchPokemon = async () => {
       c++;
       pokeImage("./assets/img/pokeball.png");
 
+      if (interval > 1)
+        for (let i = 0; i < interval; i++)
+          clearInterval(i);
+
       if (c % 2 == 0) pokeImage("./assets/img/pokeball-catch-fail.png");
 
       if (c >= 10) clearInterval(interval);
@@ -18,16 +27,21 @@ const fetchPokemon = async () => {
   } else {
     const data = await response.json();
     if (!data.results) {
-      clearInterval(interval)
+      clearInterval(interval);
       const pokeImg = data.sprites.front_default;
-      pokeImage(pokeImg);
+      pokeImage(pokeImg, true);
     }
   }
 }
 
-const pokeImage = (url) => {
+const pokeImage = (url, success = false) => {
   const pokePhoto = document.getElementById("pokeImg");
   pokePhoto.src = url;
+  if (success) {
+    changeImgSize(pokePhoto, '300px', '300px');
+  } else {
+    changeImgSize(pokePhoto);
+  }
 }
 
 const onEnter = (event) => { if (event.keyCode === 13) fetchPokemon(); }
