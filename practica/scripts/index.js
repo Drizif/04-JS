@@ -28,7 +28,7 @@ const fetchPokemon = async () => {
     const data = await response.json();
     if (!data.results) {
       clearInterval(interval);
-      const pokeImg = data.sprites.front_default;
+      const pokeImg = data.sprites.other['official-artwork'].front_default;
       pokeImage(pokeImg, true);
     }
   }
@@ -38,7 +38,7 @@ const pokeImage = (url, success = false) => {
   const pokePhoto = document.getElementById("pokeImg");
   pokePhoto.src = url;
   if (success) {
-    changeImgSize(pokePhoto, '300px', '300px');
+    changeImgSize(pokePhoto, '200px', '200px');
   } else {
     changeImgSize(pokePhoto);
   }
