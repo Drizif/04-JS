@@ -30,6 +30,22 @@ const fetchPokemon = async () => {
       clearInterval(interval);
       const pokeImg = data.sprites.other['official-artwork'].front_default;
       pokeImage(pokeImg, true);
+      setPokeDesc(data.species.url);
+    }
+  }
+}
+const setPokeDesc = async (url) => {
+  const response = await fetch(url);
+  if (response.status !== 200) {
+    console.error(response);
+  } else {
+    const data = await response.json();
+    const spanishDesc = data['flavor_text_entries'].filter(f => f.language.name.includes('es')).map(e => e.flavor_text);
+    const pokeDesc = document.querySelector('#poke-description-text');
+    // pokeDesc.textContent = spanishDesc.pop();
+    if (Array.isArray(spanishDesc) && spanishDesc.length > 0) {
+      pokeDesc.textContent = spanishDesc[0];
+
     }
   }
 }
