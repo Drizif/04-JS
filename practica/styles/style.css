@@ -21,8 +21,8 @@
   --yellow-light-border: #e5e718;
   --yellow-light-reflex: #c8c72b;
   /* Buttons */
-  --btn-black: #262626;
-  --btn-black-border: #060505;
+  --btn-black: #353535;
+  --btn-black-border: #262626;
   --btn-red-long: #c70c13;
   --btn-blue-long: #095378;
   --btn-blue-long-border: #095378;
@@ -273,4 +273,45 @@ body {
   background-color: var(--btn-blue-long);
   border: solid var(--btn-blue-long) 1px;
   border-radius: 20% 20% 20% 20%;
+}
+
+/* Navigation buttons */
+.nav-btn-container {
+  position: absolute !important;
+  /* transform: translate(20rem, 33rem); */
+}
+
+.nav-btn-1 {
+  width: 30px;
+  height: 30px;
+  background-color: var(--btn-black);
+  transform: translate(19.4rem, 29.74rem);
+}
+
+.nav-btn-2 {
+  width: 30px;
+  height: 30px;
+  background-color: var(--btn-black);
+  transform: translate(21.25rem, 26rem) !important;
+}
+
+.nav-btn-3 {
+  width: 30px;
+  height: 30px;
+  background-color: var(--btn-black);
+  transform: translate(23.05rem, 26rem);
+}
+
+.nav-btn-4 {
+  width: 30px;
+  height: 30px;
+  background-color: var(--btn-black);
+  transform: translate(21.25rem, 26rem) !important;
+}
+
+.nav-btn-5 {
+  width: 30px;
+  height: 30px;
+  background-color: var(--btn-black);
+  transform: translate(21.25rem, 22.25rem) !important;
 }
