@@ -34,7 +34,6 @@ const fetchPokemon = async () => {
       const pokeImg = data.sprites.other['official-artwork'].front_default;
       pokeImage(pokeImg, true);
       setPokeName(data.name, data.id);
-      console.log(data);
       setPokeDesc(data.species.url);
     }
   }
@@ -57,8 +56,7 @@ const setPokeDesc = async (url) => {
     const data = await response.json();
     const spanishDesc = data['flavor_text_entries'].filter(f => f.language.name.includes('es')).map(e => e.flavor_text);
     const pokeDesc = document.querySelector('#poke-description-text');
-
-    if (Array.isArray(spanishDesc) && spanishDesc.length > 0) pokeDesc.textContent = spanishDesc[0];
+    if (Array.isArray(spanishDesc) && spanishDesc.length > 0) pokeDesc.textContent = spanishDesc.shift();
   }
 }
 
