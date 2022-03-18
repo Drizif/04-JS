@@ -285,6 +285,8 @@ body {
   width: 30px;
   height: 30px;
   background-color: var(--btn-black);
+  border-radius: 0% 25% 25% 0%;
+  border: solid var(--btn-black-border) 3px;
   transform: translate(19.4rem, 29.74rem);
 }
 
@@ -292,6 +294,8 @@ body {
   width: 30px;
   height: 30px;
   background-color: var(--btn-black);
+  border-radius: 0% 0% 25% 25% ;
+  border: solid var(--btn-black-border) 3px;
   transform: translate(21.25rem, 26rem) !important;
 }
 
@@ -299,6 +303,8 @@ body {
   width: 30px;
   height: 30px;
   background-color: var(--btn-black);
+  border-radius: 25% 0% 0% 25%;
+  border: solid var(--btn-black-border) 3px;
   transform: translate(23.05rem, 26rem);
 }
 
@@ -306,6 +312,8 @@ body {
   width: 30px;
   height: 30px;
   background-color: var(--btn-black);
+  border-radius: 25% 25% 0% 0%;
+  border: solid var(--btn-black-border) 3px;
   transform: translate(21.25rem, 26rem) !important;
 }
 
@@ -313,5 +321,6 @@ body {
   width: 30px;
   height: 30px;
   background-color: var(--btn-black);
+  border-radius: 25% 25% 25% 25%;
   transform: translate(21.25rem, 22.25rem) !important;
 }
