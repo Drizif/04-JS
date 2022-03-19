@@ -35,6 +35,9 @@
   --square-blue-background-boder-color: #2165ec;
   --square-beige-background-color: #dedede;
   --square-beige-background-boder-color: #6a6a74;
+  /* Stats */
+  --stat-bar-off: #f8fdf7;
+  --stat-bar-on: #1d8ec9;
 }
 
 /* General */
@@ -105,7 +108,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 
 .screen-border {
@@ -437,7 +439,23 @@ body {
   font-family: var(--poke-text);
 }
 
-.overflow-auto {
-  width: 200px;
-  height: 100px;
+/* Stats-bar */
+.stat-bar-container {
+  position: absolute;
+  width: 290px;
+  height: 110px;
+  transform: translate(1rem, 0.5rem);
+}
+
+.stat-bar {
+  width: 36px;
+  height: 3px;
+  margin-bottom: 3px;
+  background-color: var(--stat-bar-off);
+}
+
+.stat-bar-text {
+  color: var(--screen-dark-text);
+  font-family: var(--poke-text);
+  font-size: 10px;
 }

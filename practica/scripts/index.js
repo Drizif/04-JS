@@ -1,5 +1,4 @@
 let interval;
-
 const pokeName = document.querySelector('#pokeName');
 const pokePhoto = document.getElementById("pokeImg");
 const pokeType = document.querySelector('.pokeType');
