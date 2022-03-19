@@ -1,4 +1,5 @@
 let interval;
+const statbarOff = '#f8fdf7', statbarOn = '#1d8ec9';
 const pokeName = document.querySelector('#pokeName');
 const pokePhoto = document.getElementById("pokeImg");
 const pokeType = document.querySelector('.pokeType');
@@ -6,6 +7,7 @@ const pokeHeight = document.querySelector('.pokeHeight');
 const pokeWeight = document.querySelector('.pokeWeight');
 const pokeWeakness = document.querySelector('.pokeWeakness');
 const pokeDesc = document.querySelector('#poke-description-text');
+const allStatbars = document.querySelectorAll('.stat-bar');
 
 const changeImgSize = (img, width = '100px', height = '100px') => {
   img.style.width = width;
@@ -39,7 +41,7 @@ const fetchPokemon = async () => {
   } else {
     const data = await response.json();
     if (!data.results) {
-      const { id, name, sprites, species, types, weight, height } = data;
+      const { id, name, sprites, species, types, stats, weight, height } = data;
 
       const pokeImg = sprites.other['official-artwork'].front_default;
 
@@ -49,6 +51,7 @@ const fetchPokemon = async () => {
       setPokeDesc(species.url);
       setTypes(types);
       setWeakness(types);
+      setStats(stats);
       setPhysicalData(weight, height);
     }
   }
@@ -113,6 +116,43 @@ const setWeakness = async (types) => {
   }
 }
 
+const setStats = (stats) => {
+  allStatbars.forEach(statbar => statbar.style.backgroundColor = statbarOff);
+  // const finalStats = stats.map(e => round(e.base_stat));
+  // const finalStats = stats.map(e => parseInt(e.base_stat / 10));
+  const finalStats = stats.map(e => parseInt(round(e.base_stat) / 10));
+  console.log(stats);
+  console.log(finalStats);
+
+  for (let i = 0; i < finalStats.length; i++) {
+    for (let j = 0; j < finalStats[i] + 1; j++) {
+      /* Cifra no exacta debido a que la mayoria de Pokémon tiene un maximo de estado unico */
+      const percent = parseInt(parseInt((j * 500) / 100) / 10);
+      if (percent === 0) continue;
+      const statbar = document.querySelector(`#stat-${i}-${percent}`);
+      statbar.style.backgroundColor = statbarOn;
+    }
+  }
+}
+
+// Si el numero termina con un 6, redondea a la decena siguiente
+const round = (n) => {
+  const num = n.toString();
+
+  if (parseInt(num) <= 5) return 0;
+  else if (parseInt(num) > 5 && parseInt(num) <= 10) return 10;
+  else {
+    const reverseNums = num.split('').reverse();
+
+    if (parseInt(reverseNums[0]) > 5) {
+      reverseNums[0] = 0;
+      reverseNums[1]++;
+    }
+
+    return parseInt(reverseNums.reverse().join(''));
+  }
+}
+
 const cleanData = () => {
   pokeName.textContent = undefined;
   pokeType.textContent = undefined;
@@ -120,6 +160,7 @@ const cleanData = () => {
   pokeWeight.textContent = undefined;
   pokeWeakness.textContent = undefined;
   pokeDesc.textContent = undefined;
+  allStatbars.forEach(statbar => statbar.style.backgroundColor = statbarOff);
 }
 
 const onEnter = (event) => { if (event.keyCode === 13) fetchPokemon(); }
