@@ -1,4 +1,5 @@
 let interval;
+let pokeId;
 const statbarOff = '#f8fdf7', statbarOn = '#1d8ec9';
 const pokeName = document.querySelector('#pokeName');
 const pokePhoto = document.getElementById("pokeImg");
@@ -14,8 +15,8 @@ const changeImgSize = (img, width = '100px', height = '100px') => {
   img.style.height = height;
 }
 
-const fetchPokemon = async () => {
-  const pokeInput = document.getElementById("pokeInput").value.toLowerCase();
+const fetchPokemon = async (id) => {
+  const pokeInput = id ? id : document.getElementById("pokeInput").value.toLowerCase();
   const url = `https://pokeapi.co/api/v2/pokemon/${pokeInput}`;
 
   const response = await fetch(url);
@@ -42,7 +43,7 @@ const fetchPokemon = async () => {
     const data = await response.json();
     if (!data.results) {
       const { id, name, sprites, species, moves, types, stats, weight, height } = data;
-
+      pokeId = id;
       const pokeImg = sprites.other['official-artwork'].front_default;
       clearInterval(interval);
       pokeImage(pokeImg, true);
@@ -71,8 +72,6 @@ const setPokeDesc = async (url, moves) => {
     const data = await response.json();
     const spanishDesc = data['flavor_text_entries'].filter(f => f.language.name.includes('es')).map(e => e.flavor_text);
     if (Array.isArray(spanishDesc) && spanishDesc.length > 0) {
-      // pokeDesc.textContent = spanishDesc.shift();
-      console.log(pokeDesc);
       const finalMoves = moves.map((e, idx) => `${(++idx)}.-${e.move.name}\n`).join('');
       pokeDesc.textContent = descriptionTemplate(spanishDesc.shift(), finalMoves);
       pokeDesc.style.width = '400px';
@@ -156,6 +155,21 @@ const round = (n) => {
   }
 }
 
+const upBtn = async () => {
+  if (!pokeId) {
+    await fetchPokemon(1);
+  } else {
+    if (pokeId < 890) await fetchPokemon(++pokeId);
+  }
+}
+
+const downBtn = async () => {
+  if (!pokeId) {
+    await fetchPokemon(1);
+  } else {
+    if (pokeId > 0) await fetchPokemon(--pokeId);
+  }
+}
 const cleanData = () => {
   pokeName.textContent = undefined;
   pokeType.textContent = undefined;
@@ -164,6 +178,7 @@ const cleanData = () => {
   pokeWeakness.textContent = undefined;
   pokeDesc.textContent = undefined;
   pokeDesc.style.width = '100px';
+  pokeId = undefined;
   allStatbars.forEach(statbar => statbar.style.backgroundColor = statbarOff);
 }
 
