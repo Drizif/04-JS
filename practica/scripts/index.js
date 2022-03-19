@@ -118,11 +118,7 @@ const setWeakness = async (types) => {
 
 const setStats = (stats) => {
   allStatbars.forEach(statbar => statbar.style.backgroundColor = statbarOff);
-  // const finalStats = stats.map(e => round(e.base_stat));
-  // const finalStats = stats.map(e => parseInt(e.base_stat / 10));
   const finalStats = stats.map(e => parseInt(round(e.base_stat) / 10));
-  console.log(stats);
-  console.log(finalStats);
 
   for (let i = 0; i < finalStats.length; i++) {
     for (let j = 0; j < finalStats[i] + 1; j++) {
