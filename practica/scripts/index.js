@@ -1,7 +1,12 @@
+let interval;
+
 const pokeName = document.querySelector('#pokeName');
 const pokePhoto = document.getElementById("pokeImg");
+const pokeType = document.querySelector('.pokeType');
+const pokeHeight = document.querySelector('.pokeHeight');
+const pokeWeight = document.querySelector('.pokeWeight');
+const pokeWeakness = document.querySelector('.pokeWeakness');
 const pokeDesc = document.querySelector('#poke-description-text');
-let interval;
 
 const changeImgSize = (img, width = '100px', height = '100px') => {
   img.style.width = width;
@@ -14,10 +19,8 @@ const fetchPokemon = async () => {
 
   const response = await fetch(url);
   if (response.status !== 200) {
+    cleanData();
     pokeImage("./assets/img/pokeball-catch-fail.png");
-    setPokeName();
-    pokeName.textContent = undefined
-    pokeDesc.textContent = undefined;
     let c = 0;
     interval = setInterval(() => {
       c++;
@@ -37,16 +40,22 @@ const fetchPokemon = async () => {
   } else {
     const data = await response.json();
     if (!data.results) {
+      const { id, name, sprites, species, types, weight, height } = data;
+
+      const pokeImg = sprites.other['official-artwork'].front_default;
+
       clearInterval(interval);
-      const pokeImg = data.sprites.other['official-artwork'].front_default;
       pokeImage(pokeImg, true);
-      setPokeName(data.name, data.id);
-      setPokeDesc(data.species.url);
+      setPokeName(name, id);
+      setPokeDesc(species.url);
+      setTypes(types);
+      setWeakness(types);
+      setPhysicalData(weight, height);
     }
   }
 }
 
-setPokeName = (name, id) => {
+const setPokeName = (name, id) => {
   if (name && id) {
     let capitalizedName = name.toUpperCase();
     pokeName.textContent = `#${id} ${capitalizedName}`;
@@ -64,6 +73,14 @@ const setPokeDesc = async (url) => {
   }
 }
 
+const setPhysicalData = (weight, height) => {
+  const finalHeight = (height / 10).toFixed(1);
+  const finalWeight = (weight / 10).toFixed(1);
+
+  pokeHeight.textContent = ` ${finalHeight}M`;
+  pokeWeight.textContent = ` ${finalWeight}KG`;
+}
+
 const pokeImage = (url, success = false) => {
   pokePhoto.src = url;
   if (success) {
@@ -71,6 +88,39 @@ const pokeImage = (url, success = false) => {
   } else {
     changeImgSize(pokePhoto);
   }
+}
+
+const setTypes = (types) => {
+  const finalTypes = (' ' + types.map(e => e.type.name).join(', ')).toUpperCase();
+  pokeType.textContent = finalTypes;
+}
+
+const setWeakness = async (types) => {
+  const urls = types.map(e => e.type.url);
+  const weaknessAux = [];
+  for (let i = 0; i < urls.length; i++) {
+    const url = urls[i];
+
+    const response = await fetch(url);
+    if (response.status !== 200) pokeWeakness.textContent = 'ERROR!';
+    const { double_damage_from } = (await response.json()).damage_relations;
+    const weakness = double_damage_from.map(e => e.name.toUpperCase());
+    weakness.map(e => weaknessAux.push(e));
+  }
+  if (weaknessAux.length >= 0) {
+    // Eliminar repetidos
+    const weaknessArr = [...new Set(weaknessAux)];
+    pokeWeakness.textContent = ' ' + weaknessArr.join(', ');
+  }
+}
+
+const cleanData = () => {
+  pokeName.textContent = undefined;
+  pokeType.textContent = undefined;
+  pokeHeight.textContent = undefined;
+  pokeWeight.textContent = undefined;
+  pokeWeakness.textContent = undefined;
+  pokeDesc.textContent = undefined;
 }
 
 const onEnter = (event) => { if (event.keyCode === 13) fetchPokemon(); }
