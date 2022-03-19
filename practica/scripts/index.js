@@ -41,14 +41,13 @@ const fetchPokemon = async () => {
   } else {
     const data = await response.json();
     if (!data.results) {
-      const { id, name, sprites, species, types, stats, weight, height } = data;
+      const { id, name, sprites, species, moves, types, stats, weight, height } = data;
 
       const pokeImg = sprites.other['official-artwork'].front_default;
-
       clearInterval(interval);
       pokeImage(pokeImg, true);
       setPokeName(name, id);
-      setPokeDesc(species.url);
+      setPokeDesc(species.url, moves);
       setTypes(types);
       setWeakness(types);
       setStats(stats);
@@ -64,16 +63,24 @@ const setPokeName = (name, id) => {
   }
 }
 
-const setPokeDesc = async (url) => {
+const setPokeDesc = async (url, moves) => {
   const response = await fetch(url);
   if (response.status !== 200) {
     console.error(response);
   } else {
     const data = await response.json();
     const spanishDesc = data['flavor_text_entries'].filter(f => f.language.name.includes('es')).map(e => e.flavor_text);
-    if (Array.isArray(spanishDesc) && spanishDesc.length > 0) pokeDesc.textContent = spanishDesc.shift();
+    if (Array.isArray(spanishDesc) && spanishDesc.length > 0) {
+      // pokeDesc.textContent = spanishDesc.shift();
+      console.log(pokeDesc);
+      const finalMoves = moves.map((e, idx) => `${(++idx)}.-${e.move.name}\n`).join('');
+      pokeDesc.textContent = descriptionTemplate(spanishDesc.shift(), finalMoves);
+      pokeDesc.style.width = '400px';
+    }
   }
 }
+
+const descriptionTemplate = (desc, moves) => { return `DESCRIPCION:\n${desc}\n\nMOVIMIENTOS:\n${moves}` }
 
 const setPhysicalData = (weight, height) => {
   const finalHeight = (height / 10).toFixed(1);
@@ -156,6 +163,7 @@ const cleanData = () => {
   pokeWeight.textContent = undefined;
   pokeWeakness.textContent = undefined;
   pokeDesc.textContent = undefined;
+  pokeDesc.style.width = '100px';
   allStatbars.forEach(statbar => statbar.style.backgroundColor = statbarOff);
 }
 
