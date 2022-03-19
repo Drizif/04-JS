@@ -298,6 +298,33 @@ body {
   transform: translate(50%, 25%);
 }
 
+.big-yellow-light {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  background-color: var(--yellow-light);
+  transform: translate(21rem, 31.5rem);
+}
+
+.big-yellow-light-reflex-1{
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  border-radius: 100%;
+  background-color: var(--yellow-light-reflex);
+  transform: translate(10%, 14.5%);
+}
+
+.big-yellow-light-reflex-2{
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  background-color: var(--yellow-light-border);
+  transform: translate(45%, 55%);
+}
+
 /* Buttons */
 .btn-black {
   position: absolute;
