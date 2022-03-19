@@ -121,6 +121,8 @@ body {
 
 .screen-green {
   position: absolute;
+  padding-top: 1px;
+  padding-left: 3px;
   width: 200px;
   height: 100px;
   background-color: var(--screen-green);
@@ -307,7 +309,7 @@ body {
   transform: translate(21rem, 31.5rem);
 }
 
-.big-yellow-light-reflex-1{
+.big-yellow-light-reflex-1 {
   position: absolute;
   width: 25px;
   height: 25px;
@@ -316,7 +318,7 @@ body {
   transform: translate(10%, 14.5%);
 }
 
-.big-yellow-light-reflex-2{
+.big-yellow-light-reflex-2 {
   position: absolute;
   width: 10px;
   height: 10px;
